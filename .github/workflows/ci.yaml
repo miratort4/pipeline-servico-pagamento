@@ -3,6 +3,7 @@ name: Pipeline CI
 
 # gatilhos / triggers - regras de disparo
 # gatilho manual = workflow_dispatch
+# gatilho por integracao = push
 # gatilho agendado = schedule
 
 on:
@@ -31,3 +32,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24.x
+
+      # instalando dependencias
+      - name: Instalando dependencias
+        run: npm install  
+
