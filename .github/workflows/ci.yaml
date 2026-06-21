@@ -41,3 +41,9 @@ jobs:
       - name: Rodando os testes
         run: npm test
 
+      - name: Report de testes
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: ./test-reports/
+          retention-days: 30
