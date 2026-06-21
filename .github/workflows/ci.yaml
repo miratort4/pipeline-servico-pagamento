@@ -1,0 +1,33 @@
+# nome da pipeline
+name: Pipeline CI
+
+# gatilhos / triggers - regras de disparo
+# gatilho manual = workflow_dispatch
+# gatilho agendado = schedule
+
+on:
+  workflow_dispatch:
+  
+  push:
+    branches:
+      - main
+  
+  schedule:
+    - cron: '0 0 * * 5'
+
+#tarefas dentro da pipeline = jobs
+jobs:
+  #nome do job
+  testes:
+    # maquina onde o job vai rodar
+    runs-on: ubuntu-latest
+
+    # passos do job
+    steps:
+      # clone do projeto
+      - uses: actions/checkout@v4
+
+      # instalção do node
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.x
