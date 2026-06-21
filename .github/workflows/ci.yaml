@@ -3,7 +3,7 @@ name: Pipeline CI
 
 # gatilhos / triggers - regras de disparo
 # gatilho manual = workflow_dispatch
-# gatilho por integracao = push
+# gatilho por push
 # gatilho agendado = schedule
 
 on:
@@ -14,7 +14,7 @@ on:
       - main
   
   schedule:
-    - cron: '0 0 * * 5'
+    - cron: '59 23 * * 0'       # todo domingo às 23:59 horario UTC ou domingo às 20:59 horario de Brasília
 
 #tarefas dentro da pipeline = jobs
 jobs:
@@ -37,11 +37,12 @@ jobs:
       - name: Instalando dependencias
         run: npm install  
 
-      # Roodando os testes
+      # Rodando e gerando relatório de testes
       - name: Rodando os testes
         run: npm test
 
-      - name: Report de testes
+      # Publicar relatorio: cria download .zip > extrai arquivo > abre .html no navegador
+      - name: Publicar Report de testes
         uses: actions/upload-artifact@v4
         with:
           name: test-report
